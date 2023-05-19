@@ -1,5 +1,14 @@
 <div class="myxblock_block">
-<p>MyXBlock: count is now
-    <span class='count'>{self.count}</span> (click me to increment).
-</p>
+    <h2>Select Yes/No</h2>
+    <div class="options">
+        <input type="radio" class="option-yes" name="option" value="yes">Yes</input>
+        <input type="radio" class="option-no" name="option" value="no">No</input>
+    </div>
+    <button class='check-button'>Check</button>
+    <div class="answer-selected">
+        {self.selected}
+    </div>
+    <!-- <p>MyXBlock: count is now
+        <span class='count'>{self.count}</span> (click me to increment).
+    </p> -->
 </div>

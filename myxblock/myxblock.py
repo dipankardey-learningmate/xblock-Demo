@@ -3,7 +3,7 @@
 import pkg_resources
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
-from xblock.fields import Integer, Scope
+from xblock.fields import Integer, Scope, String
 
 
 class MyXBlock(XBlock):
@@ -18,6 +18,11 @@ class MyXBlock(XBlock):
     count = Integer(
         default=0, scope=Scope.user_state,
         help="A simple counter, to show something happening",
+    )
+    
+    selected = String(
+        default="", scope=Scope.user_state,
+        help="Shows selected option",
     )
 
     def resource_string(self, path):
@@ -50,6 +55,13 @@ class MyXBlock(XBlock):
 
         self.count += 1
         return {"count": self.count}
+    
+    @XBlock.json_handler
+    def show_selected(self, data, suffix=''):
+        if data["selected"]:
+            self.selected = data["selected"]
+            return {"selected" : f"Selected option is : {self.selected}"}
+        return {"selected" : self.selected}
 
     # TO-DO: change this to create the scenarios you'd like to see in the
     # workbench while developing your XBlock.
